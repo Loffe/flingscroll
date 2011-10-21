@@ -1,14 +1,17 @@
-panscroll
+Flingscroll
 =========
 
-User script to pan webpages using the middle mouse button.
+Scroll your webpages by dragging with middle mouse button. Flinging
+(also known as kinetic scrolling) is supported for fast scrolling.
 
 Tested in Chromium, might work in Firefox.
+
+Based on panscroll by Daniel Gröber.
 
 Installation
 ============
 
-Download the script and chrome will ask if you want to install it: [Download here](https://github.com/DanielG/panscroll/raw/master/panscroll.user.js)
+Download the script and chrome will ask if you want to install it: [Download here](https://github.com/Loffe/flingscroll/raw/master/flingscroll.user.js)
 
 Licence
 =======
