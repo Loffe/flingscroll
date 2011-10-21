@@ -8,6 +8,7 @@
 
 /* Pan webpages using the middle mouse button.
  * Copyright (C) 2011 Daniel Gröber <me ät dxld dot at>
+ *               2011 Erik Eloff <erik@eloff.se>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,8 +25,10 @@
  */
 
 (function(){
-    var mouseButton = 1 // middle mouse button (tested in chromium)
+    var middleButton = 1 // middle mouse button (tested in chromium)
     var lastEv = null;
+    var speedX = 0;
+    var speedY = 0;
 
     document.addEventListener('mousemove', function(ev){
         if(!lastEv) {
@@ -34,23 +37,42 @@
         }
 
         var btn = ev.button;
-        if (btn == mouseButton) { // middle mouse button
-            window.scrollBy(lastEv.screenX - ev.screenX
-                            , lastEv.screenY - ev.screenY);
+        if (btn == middleButton) {
+            speedX = lastEv.screenX - ev.screenX;
+            speedY = lastEv.screenY - ev.screenY;
+            window.scrollBy(speedX, speedY);
         } else {
-            lastEv = 0
+            lastEv = 0;
         }
 
         lastEv = ev;
     });
 
+    var intervalSeconds = 1.0 / 60;
+    var intervalMillis = intervalSeconds * 1000;
+    var decay = 2;
+    var doScroll = function () {
+        window.scrollBy(speedX, speedY);
+        speedX *= (1 - decay * intervalSeconds);
+        speedY *= (1 - decay * intervalSeconds);
+        if (Math.abs(speedY) > 0.5 || Math.abs(speedY) > 0.5) {
+            setTimeout(doScroll, intervalMillis);
+        }
+    }
+
     var preventClickEvents = function(ev){
-        if(ev.button == 1) {
+        if(ev.button == middleButton) {
             var el = null;
             if(el = ev.toElement) {
                 el.onclick = null;
                 el.onmousedown = null;
                 el.onmouseup = null;
+            }
+            if (ev.type == "mouseup") {
+                setTimeout(doScroll, intervalMillis);
+            } else if (ev.type == "mousedown") {
+                speedX = 0;
+                speedY = 0;
             }
         }
     }
