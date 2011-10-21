@@ -1,12 +1,13 @@
 // ==UserScript==
-// @name PanScroll
-// @description User script to pan webpages using the middle mouse button.
+// @name FlingScroll
+// @description Scroll your webpages by dragging with middle mouse button. Flinging (also known as kinetic scrolling) is supported for fast scrolling.
 // @licence GPLv3; http://www.gnu.org/copyleft/gpl.html
 // @match http://*/*
 // @match https://*/*
 // ==/UserScript==
 
-/* Pan webpages using the middle mouse button.
+/* Scroll your webpages by dragging with middle mouse button. Flinging
+ * (also known as kinetic scrolling) is supported for fast scrolling.
  * Copyright (C) 2011 Daniel Gröber <me ät dxld dot at>
  *               2011 Erik Eloff <erik@eloff.se>
  *
